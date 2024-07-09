@@ -1,11 +1,11 @@
 package pl.base.tests;
 
 import com.microsoft.playwright.*;
-import org.junit.jupiter.api.*;
-
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
@@ -16,15 +16,15 @@ public class BaseTest {
 
     protected Page page;
 
-    @BeforeAll
+    @BeforeClass
     static void launchBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                 .setHeadless(false)
-                .setSlowMo(1000));
+                .setSlowMo(0));
     }
 
-    @BeforeEach
+    @BeforeMethod
     void createBrowserContext() {
         browserContext = browser.newContext();
 
@@ -37,10 +37,10 @@ public class BaseTest {
         page.setViewportSize(1600, 900);
     }
 
-    @AfterEach
-    void closeBrowserContext(TestInfo testInfo) {
+    @AfterMethod
+    void closeBrowserContext(ITestResult testInfo) {
 //        String traceName = "traces/trace_"
-//                +testInfo.getDisplayName().replace("()", "")
+//                +testInfo.getMethodName()
 //                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
 //                +".zip";
 
@@ -48,7 +48,7 @@ public class BaseTest {
         browserContext.close();
     }
 
-    @AfterAll
+    @AfterClass
     static void closeBrowser() {
         browser.close();
         playwright.close();

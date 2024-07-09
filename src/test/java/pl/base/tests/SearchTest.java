@@ -1,26 +1,37 @@
 package pl.base.tests;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import pl.base.pages.HomePage;
 import pl.base.pages.SearchResultPage;
 
-class SearchTest extends BaseTest{
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+public class SearchTest extends BaseTest{
 
     private HomePage homePage;
 
-    @BeforeEach
+    @BeforeMethod
     void setUp() {
         homePage = new HomePage(page);
+        page.navigate("https://skleptestera.pl/index.php");
     }
 
-    @Test
-    void shouldReturnProductsBySearchNameMug() {
-        page.navigate("https://skleptestera.pl/index.php");
-        SearchResultPage searchResultPage = homePage.getTopMenuAndSearchSection().searchForProducts("mug");
+    @Test(dataProvider = "testData")
+    void shouldReturnProductsBySearchNameProduct(String productName, int productCount) {
+        SearchResultPage searchResultPage = homePage.getTopMenuAndSearchSection().searchForProducts(productName);
 
-        int numberOfProducts = searchResultPage.getSearchResultSection().returnNumberOfProducts();
-        Assertions.assertEquals(5, numberOfProducts);
+        assertThat(searchResultPage.getSearchResultSection().getProducts().size()).isEqualTo(productCount);
+    }
+
+    @DataProvider(name = "testData")
+    public Object [][] testDataProvider() {
+        return new Object[][] {
+                {"mug", 5},
+                {"frame", 4},
+                {"t-shirt", 1}
+        };
     }
 }
