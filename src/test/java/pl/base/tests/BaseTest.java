@@ -1,4 +1,4 @@
-package pl.base;
+package pl.base.tests;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
@@ -28,23 +28,23 @@ public class BaseTest {
     void createBrowserContext() {
         browserContext = browser.newContext();
 
-        browserContext.tracing().start(new Tracing.StartOptions()
-                .setScreenshots(true)
-                .setSnapshots(true)
-                .setSources(true));
+//        browserContext.tracing().start(new Tracing.StartOptions()
+//                .setScreenshots(true)
+//                .setSnapshots(true)
+//                .setSources(true));
 
         page = browserContext.newPage();
-        page.setViewportSize(1920, 1080);
+        page.setViewportSize(1600, 900);
     }
 
     @AfterEach
     void closeBrowserContext(TestInfo testInfo) {
-        String traceName = "trace/trace_"
-                +testInfo.getDisplayName().replace("()", "")
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
-                +".zip";
+//        String traceName = "traces/trace_"
+//                +testInfo.getDisplayName().replace("()", "")
+//                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"))
+//                +".zip";
 
-        browserContext.tracing().stop(new Tracing.StopOptions().setPath(Paths.get(traceName)));
+//        browserContext.tracing().stop(new Tracing.StopOptions().setPath(Paths.get(traceName)));
         browserContext.close();
     }
 
