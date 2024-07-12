@@ -1,5 +1,6 @@
 package pl.base.tests;
 
+import org.example.utils.Properties;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,7 +17,7 @@ public class SearchTest extends BaseTest{
     @BeforeMethod
     void setUp() {
         homePage = new HomePage(page);
-        page.navigate("https://skleptestera.pl/index.php");
+        page.navigate(Properties.getProperty("app.url"));
     }
 
     @Test(dataProvider = "testData")
