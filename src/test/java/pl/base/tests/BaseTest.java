@@ -25,15 +25,15 @@ public class BaseTest {
     static void launchBrowser() {
         playwright = Playwright.create();
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false)
-                .setSlowMo(0));
+                .setHeadless(Boolean.parseBoolean(Properties.getProperty("browser.headless")))
+                .setSlowMo(Double.parseDouble(Properties.getProperty("browser.slow.mo"))));
     }
 
     @BeforeMethod
     void createBrowserContext() {
         browserContext = browser.newContext();
 
-        if(Properties.getProperty("tracing.enable").equals("true")) {
+        if(isTracingEnable()) {
             browserContext.tracing().start(new Tracing.StartOptions()
                     .setScreenshots(true)
                     .setSnapshots(true)
@@ -47,7 +47,7 @@ public class BaseTest {
     @AfterMethod
     void closeBrowserContext(ITestResult testInfo) {
 
-        if(Properties.getProperty("tracing.enable").equals("true")) {
+        if(isTracingEnable()) {
             String traceName = "traces/trace_"
                     + testInfo.getMethod().getMethodName()
                     + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Properties.getProperty("tracing.date.format")))
@@ -63,5 +63,9 @@ public class BaseTest {
     static void closeBrowser() {
         browser.close();
         playwright.close();
+    }
+
+    boolean isTracingEnable() {
+        return Boolean.parseBoolean(Properties.getProperty("tracing.enable"));
     }
 }
