@@ -10,7 +10,7 @@ import pl.base.pages.SearchResultPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class SearchTest extends BaseTest{
+public class SearchTest extends BaseTest {
 
     private HomePage homePage;
 
@@ -18,6 +18,7 @@ public class SearchTest extends BaseTest{
     void setUp() {
         homePage = new HomePage(page);
         page.navigate(Properties.getProperty("app.url"));
+        homePage.getTopNavigationSection().selectEnglishLanguage();
     }
 
     @Test(dataProvider = "testData")
@@ -28,8 +29,8 @@ public class SearchTest extends BaseTest{
     }
 
     @DataProvider(name = "testData")
-    public Object [][] testDataProvider() {
-        return new Object[][] {
+    public Object[][] testDataProvider() {
+        return new Object[][]{
                 {"mug", 5},
                 {"frame", 4},
                 {"t-shirt", 1}
