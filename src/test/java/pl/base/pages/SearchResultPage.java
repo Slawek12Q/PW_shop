@@ -1,12 +1,10 @@
 package pl.base.pages;
 
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.LoadState;
 import lombok.Getter;
-import org.example.utils.PageUtils;
 import pl.base.pages.sections.searchResultsSection.SearchResultSection;
 
-import static org.example.utils.PageUtils.*;
+import static org.example.utils.PageUtils.waitForLoadState;
 
 @Getter
 public class SearchResultPage {
