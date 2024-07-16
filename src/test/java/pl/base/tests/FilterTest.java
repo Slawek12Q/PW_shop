@@ -7,7 +7,6 @@ import pl.base.pages.ArtPage;
 import pl.base.pages.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.example.utils.PageUtils.waitForLoadState;
 
 public class FilterTest extends BaseTest{
 
@@ -25,11 +24,14 @@ public class FilterTest extends BaseTest{
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
 
 
-        assertThat(artPage.getFilterResultSection().getProducts().size()).isEqualTo(7);
+        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
 
-        page.navigate(page.url() + "&q=Price-zł-31-44");
-        waitForLoadState(page);
+        System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
-        assertThat(artPage.getFilterResultSection().getProducts().size()).isEqualTo(4);
+        page.navigate(page.url() + "&q=Price-zł-30-44");
+        page.waitForTimeout(1000);
+        System.out.println(artPage.getProductsSection().getProductPricesDouble());
+
+        assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 30)).isTrue();
     }
 }

@@ -9,17 +9,19 @@ import java.util.stream.Collectors;
 
 @Getter
 public class ProductsSection {
-
+    Page page;
     private List<Locator> products;
-    private List<Locator> productsPrice;
-
     public ProductsSection(Page page) {
+        this.page = page;
         this.products = page.locator(".thumbnail-top").all();
-        this.productsPrice = page.locator("span[class=price]").all();
     }
 
+    private List<Locator> getProductsPricesList() {
+        return page.locator("span[class=price]").all();
+    }
     public List<Double> getProductPricesDouble() {
-        return productsPrice.stream().map(s -> s.innerText().substring(2))
+
+        return getProductsPricesList().stream().map(s -> s.innerText().substring(2))
                 .map(Double::parseDouble).collect(Collectors.toList());
     }
 }
