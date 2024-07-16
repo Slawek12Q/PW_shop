@@ -1,6 +1,7 @@
 package pl.base.tests;
 
 import com.microsoft.playwright.*;
+import org.example.factory.BrowserFactory;
 import org.example.utils.Properties;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -15,25 +16,26 @@ import java.time.format.DateTimeFormatter;
 public class BaseTest {
 
     private static Playwright playwright;
-    protected static Browser browser;
+    private Browser browser;
+
+    private BrowserFactory browserFactory;
 
     protected BrowserContext browserContext;
 
     protected Page page;
 
     @BeforeClass
-    static void launchBrowser() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(Boolean.parseBoolean(Properties.getProperty("browser.headless")))
-                .setSlowMo(Double.parseDouble(Properties.getProperty("browser.slow.mo"))));
+    void launchBrowser() {
+
+        browserFactory = new BrowserFactory();
+        browser = browserFactory.getBrowser();
     }
 
     @BeforeMethod
     void createBrowserContext() {
         browserContext = browser.newContext();
 
-        if(isTracingEnable()) {
+        if (isTracingEnable()) {
             browserContext.tracing().start(new Tracing.StartOptions()
                     .setScreenshots(true)
                     .setSnapshots(true)
@@ -47,7 +49,7 @@ public class BaseTest {
     @AfterMethod
     void closeBrowserContext(ITestResult testInfo) {
 
-        if(isTracingEnable()) {
+        if (isTracingEnable()) {
             String traceName = "traces/trace_"
                     + testInfo.getMethod().getMethodName()
                     + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Properties.getProperty("tracing.date.format")))
@@ -60,9 +62,9 @@ public class BaseTest {
     }
 
     @AfterClass
-    static void closeBrowser() {
+    void closeBrowser() {
         browser.close();
-        playwright.close();
+        browserFactory.getPlaywright().close();
     }
 
     boolean isTracingEnable() {
