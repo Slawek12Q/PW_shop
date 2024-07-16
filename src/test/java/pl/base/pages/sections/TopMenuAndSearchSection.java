@@ -2,6 +2,7 @@ package pl.base.pages.sections;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import pl.base.pages.ArtPage;
 import pl.base.pages.SearchResultPage;
 
@@ -14,7 +15,7 @@ public class TopMenuAndSearchSection {
     public TopMenuAndSearchSection(Page page) {
         this.page = page;
         this.searchInput = page.locator("input[name=s]");
-        this.artButton = page.locator("#category-9");
+        this.artButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Art").setExact(true));
     }
 
     public SearchResultPage searchForProducts(String productName) {
@@ -23,7 +24,7 @@ public class TopMenuAndSearchSection {
         return new SearchResultPage(page);
     }
 
-    public ArtPage pressArtButton() {
+    public ArtPage clickArtButton() {
         artButton.click();
         return new ArtPage(page);
     }
