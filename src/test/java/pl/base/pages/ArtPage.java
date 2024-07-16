@@ -1,24 +1,18 @@
 package pl.base.pages;
 
-import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
-import pl.base.pages.sections.TopMenuAndSearchSection;
-import pl.base.pages.sections.filter.FilterResultSection;
-
-import java.util.List;
+import pl.base.pages.sections.filter.ProductsSection;
 
 import static org.example.utils.PageUtils.waitForLoadState;
 
 @Getter
 public class ArtPage {
 
-    private FilterResultSection filterResultSection;
+    private ProductsSection productsSection;
 
     public ArtPage(Page page) {
         waitForLoadState(page);
-        filterResultSection = new FilterResultSection(page);
+        productsSection = new ProductsSection(page);
     }
-
-
 }
