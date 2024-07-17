@@ -11,7 +11,7 @@ public class FilterBySection {
         this.leftSlider = page.locator(".ui-slider-handle").first();
     }
 
-    public void showLeftLocator() {
+    public void showLeftSlider() {
         System.out.println(leftSlider.boundingBox().x);
         System.out.println(leftSlider.boundingBox().y);
         System.out.println(leftSlider.boundingBox().height);

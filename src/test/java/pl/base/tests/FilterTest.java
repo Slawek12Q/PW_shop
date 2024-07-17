@@ -31,6 +31,7 @@ public class FilterTest extends BaseTest{
         page.navigate(page.url() + "&q=Price-zł-30-44");
         page.waitForTimeout(1000);
         System.out.println(artPage.getProductsSection().getProductPricesDouble());
+        artPage.getFilterBySection().showLeftSlider();
 
         assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 30)).isTrue();
     }
