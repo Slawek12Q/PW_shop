@@ -26,12 +26,15 @@ public class FilterTest extends BaseTest{
 
         assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
 
-        System.out.println(artPage.getProductsSection().getProductPricesDouble());
+//        System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
-        page.navigate(page.url() + "&q=Price-zł-30-44");
-        page.waitForTimeout(1000);
-        System.out.println(artPage.getProductsSection().getProductPricesDouble());
-        artPage.getFilterBySection().showLeftSlider();
+//        page.navigate(page.url() + "&q=Price-zł-30-44");
+//        page.waitForTimeout(1000);
+
+//        System.out.println(artPage.getProductsSection().getProductPricesDouble());
+
+        artPage.getFilterBySection().filterProductsByPriceMouse(40.0);
+        page.waitForTimeout(3000);
 
         assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 30)).isTrue();
     }
