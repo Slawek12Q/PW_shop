@@ -26,7 +26,7 @@ public class FilterTest extends BaseTest{
 
         assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
 
-//        System.out.println(artPage.getProductsSection().getProductPricesDouble());
+        System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
 //        page.navigate(page.url() + "&q=Price-zł-30-44");
 //        page.waitForTimeout(1000);
