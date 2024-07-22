@@ -20,22 +20,39 @@ public class FilterTest extends BaseTest{
     }
 
     @Test
-    public void shouldReturnProductWithPriceGreaterThan40() {
+    public void shouldReturnProductWithPriceGreaterThan40Url() {
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
-
 
         assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
 
         System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
-//        page.navigate(page.url() + "&q=Price-zł-30-44");
-//        page.waitForTimeout(1000);
+        page.navigate(page.url() + "&q=Price-zł-30-44");
 
-//        System.out.println(artPage.getProductsSection().getProductPricesDouble());
-
-        artPage.getFilterBySection().filterProductsByPriceMouse(40.0);
-        page.waitForTimeout(3000);
+        System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
         assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 30)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnProductWithPriceGreaterThan40Mouse() {
+        ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
+
+        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
+
+        artPage.getFilterBySection().filterProductsByPriceMouse(40.0);
+
+        assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 40)).isTrue();
+    }
+
+    @Test
+    public void shouldReturnProductWithPriceGreaterThan40KeyBoard() {
+        ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
+
+        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
+
+        artPage.getFilterBySection().filterProductsByPriceKeyboard(40);
+
+        assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 40)).isTrue();
     }
 }

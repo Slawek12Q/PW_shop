@@ -41,6 +41,13 @@ public class FilterBySection {
         }
     }
 
+    public void filterProductsByPriceKeyboard(double fromPrice) {
+        while (fromPrice != getFromPrice()) {
+            leftSlider.press("ArrowRight");
+            page.waitForCondition(() -> page.locator(".overlay__content").isHidden());
+        }
+    }
+
     private double getFromPrice() {
        return Arrays.asList(page.locator("#search_filters li p").innerText().split(" "))
                .stream()
