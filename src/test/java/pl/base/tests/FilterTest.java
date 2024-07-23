@@ -55,4 +55,10 @@ public class FilterTest extends BaseTest{
 
         assertThat(artPage.getProductsSection().getProductPricesDouble().stream().allMatch(s -> s > 40)).isTrue();
     }
+
+    @Test
+    public void checkFilterAndCheckReturnProduct() {
+        ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton().getFilterBySection().checkMatPaperFilter();
+        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(3);
+    }
 }

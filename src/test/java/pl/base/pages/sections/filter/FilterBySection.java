@@ -2,6 +2,8 @@ package pl.base.pages.sections.filter;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import pl.base.pages.ArtPage;
 
 import java.util.Arrays;
 
@@ -11,10 +13,13 @@ public class FilterBySection {
     private Locator leftSlider;
     private Locator priceLabel;
 
+    private Locator matPaperFilter;
+
     public FilterBySection(Page page) {
         this.page = page;
         this.leftSlider = page.locator(".ui-slider-handle").first();
         this.priceLabel = page.locator("#search_filters li p");
+        this.matPaperFilter = page.locator("//input[contains(@id, 'facet_input')]").first();
     }
 
     public void showLeftSlider() {
@@ -56,5 +61,12 @@ public class FilterBySection {
                .findFirst()
                .orElseThrow(() -> new RuntimeException("No price found"));
 
+    }
+
+    public ArtPage checkMatPaperFilter() {
+        matPaperFilter.scrollIntoViewIfNeeded();
+        matPaperFilter.check();
+        page.waitForCondition(() -> page.locator(".overlay__content").isHidden());
+        return new ArtPage(page);
     }
 }
