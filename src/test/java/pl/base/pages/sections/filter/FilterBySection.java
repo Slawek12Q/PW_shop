@@ -2,9 +2,12 @@ package pl.base.pages.sections.filter;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import org.example.utils.StringUtils;
 import pl.base.pages.ArtPage;
 
 import java.util.Arrays;
+
+import static org.example.utils.StringUtils.*;
 
 public class FilterBySection {
 
@@ -55,7 +58,7 @@ public class FilterBySection {
     private double getFromPrice() {
        return Arrays.asList(page.locator("#search_filters li p").innerText().split(" "))
                .stream()
-               .map(s -> s.replaceAll("zł", ""))
+               .map(s -> s.replaceAll(toUTF8("zł"), ""))
                .mapToDouble(Double::parseDouble)
                .findFirst()
                .orElseThrow(() -> new RuntimeException("No price found"));
