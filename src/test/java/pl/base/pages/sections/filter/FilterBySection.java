@@ -2,7 +2,6 @@ package pl.base.pages.sections.filter;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.options.AriaRole;
 import pl.base.pages.ArtPage;
 
 import java.util.Arrays;
@@ -49,7 +48,7 @@ public class FilterBySection {
     public void filterProductsByPriceKeyboard(double fromPrice) {
         while (fromPrice != getFromPrice()) {
             leftSlider.press("ArrowRight");
-            page.waitForCondition(() -> page.locator(".overlay__content").isHidden());
+            waitTillTheEndOfCoverLoader();
         }
     }
 
@@ -66,7 +65,11 @@ public class FilterBySection {
     public ArtPage checkMatPaperFilter() {
         matPaperFilter.scrollIntoViewIfNeeded();
         matPaperFilter.check();
-        page.waitForCondition(() -> page.locator(".overlay__content").isHidden());
+        waitTillTheEndOfCoverLoader();
         return new ArtPage(page);
+    }
+
+    private void waitTillTheEndOfCoverLoader() {
+        page.waitForCondition(() -> page.locator(".overlay__content").isHidden());
     }
 }
