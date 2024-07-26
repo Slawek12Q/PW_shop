@@ -5,6 +5,8 @@ import com.microsoft.playwright.Page;
 import lombok.Getter;
 import org.example.dto.ProductDTO;
 import pl.base.pages.SearchResultPage;
+import pl.base.pages.sections.productDetailsPage.AddToCartSection;
+import pl.base.pages.sections.productDetailsPage.ProductCustomizationSection;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,13 +31,14 @@ public class SearchResultSection {
         return new SearchResultPage(page);
     }
 
-    public void viewProductDetail(String productName) {
+    public ProductCustomizationSection viewProductDetail(String productName) {
         ProductDTO productDTO = productsToDto().stream()
                 .filter(p -> p.getProductName().equals(productName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException());
 
         productDTO.getPicture().click();
+        return new ProductCustomizationSection(page);
     }
 
     public List<ProductDTO> productsToDto() {
