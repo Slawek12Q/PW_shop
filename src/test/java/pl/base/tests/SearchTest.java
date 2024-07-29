@@ -25,15 +25,11 @@ public class SearchTest extends BaseTest {
     void shouldReturnProductsBySearchNameProduct(String productName, int productCount) {
         SearchResultPage searchResultPage = homePage.getTopMenuAndSearchSection().searchForProducts(productName);
 
-        assertThat(searchResultPage.getSearchResultSection().getProducts().size()).isEqualTo(productCount);
+        assertThat(searchResultPage.getSearchResultSection().getProducts()).hasSize(productCount);
     }
 
     @DataProvider(name = "testData")
     public Object[][] testDataProvider() {
-        return new Object[][]{
-                {"mug", 5},
-                {"frame", 4},
-                {"t-shirt", 1}
-        };
+        return new Object[][]{{"mug", 5}, {"frame", 4}, {"t-shirt", 1}};
     }
 }

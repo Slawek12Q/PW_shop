@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
 import org.example.dto.ProductDTO;
+import pl.base.pages.ProductDetailsPage;
 import pl.base.pages.SearchResultPage;
 import pl.base.pages.sections.productDetailsPage.AddToCartSection;
 import pl.base.pages.sections.productDetailsPage.ProductCustomizationSection;
@@ -26,19 +27,15 @@ public class SearchResultSection {
         return products.size();
     }
 
-    public SearchResultPage clickOnMug() {
-        products.get(0).click();
-        return new SearchResultPage(page);
-    }
 
-    public ProductCustomizationSection viewProductDetail(String productName) {
+    public ProductDetailsPage viewProductDetail(String productName) {
         ProductDTO productDTO = productsToDto().stream()
                 .filter(p -> p.getProductName().equals(productName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException());
 
         productDTO.getPicture().click();
-        return new ProductCustomizationSection(page);
+        return new ProductDetailsPage(page);
     }
 
     public List<ProductDTO> productsToDto() {
