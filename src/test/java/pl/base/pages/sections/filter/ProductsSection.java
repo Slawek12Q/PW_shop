@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class ProductsSection {
     Page page;
     private List<Locator> products;
+
     public ProductsSection(Page page) {
         this.page = page;
         this.products = page.locator(".thumbnail-top").all();
@@ -19,6 +20,7 @@ public class ProductsSection {
     private List<Locator> getProductsPricesList() {
         return page.locator("span[class=price]").all();
     }
+
     public List<Double> getProductPricesDouble() {
 
         return getProductsPricesList().stream().map(s -> s.innerText().substring(2))

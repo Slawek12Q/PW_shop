@@ -8,7 +8,7 @@ import pl.base.pages.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FilterTest extends BaseTest{
+public class FilterTest extends BaseTest {
 
     private HomePage homePage;
 
@@ -23,7 +23,7 @@ public class FilterTest extends BaseTest{
     public void shouldReturnProductWithPriceGreaterThan40Url() {
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
 
-        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
+        assertThat(artPage.getProductsSection().getProducts()).hasSize(7);
 
         System.out.println(artPage.getProductsSection().getProductPricesDouble());
 
@@ -38,7 +38,7 @@ public class FilterTest extends BaseTest{
     public void shouldReturnProductWithPriceGreaterThan40Mouse() {
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
 
-        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
+        assertThat(artPage.getProductsSection().getProducts()).hasSize(7);
 
         artPage.getFilterBySection().filterProductsByPriceMouse(40.0);
 
@@ -49,7 +49,7 @@ public class FilterTest extends BaseTest{
     public void shouldReturnProductWithPriceGreaterThan40KeyBoard() {
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton();
 
-        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(7);
+        assertThat(artPage.getProductsSection().getProducts()).hasSize(7);
 
         artPage.getFilterBySection().filterProductsByPriceKeyboard(40);
 
@@ -59,6 +59,6 @@ public class FilterTest extends BaseTest{
     @Test
     public void checkFilterAndCheckReturnProduct() {
         ArtPage artPage = homePage.getTopMenuAndSearchSection().clickArtButton().getFilterBySection().checkMatPaperFilter();
-        assertThat(artPage.getProductsSection().getProducts().size()).isEqualTo(3);
+        assertThat(artPage.getProductsSection().getProducts()).hasSize(3);
     }
 }

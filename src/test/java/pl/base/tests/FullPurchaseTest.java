@@ -21,6 +21,7 @@ public class FullPurchaseTest extends BaseTest {
     public void shouldPurchaseSelectedProductTest() {
         SearchResultPage searchResultPage = homePage.getTopMenuAndSearchSection().searchForProducts("Customizable Mug");
         String customizationLabel = searchResultPage.getSearchResultSection().viewProductDetail("Customizable Mug").customizeProduct("Bla bla bla").getCustomizationLabel();
+
         page.waitForTimeout(5000);
         System.out.println(customizationLabel);
     }
