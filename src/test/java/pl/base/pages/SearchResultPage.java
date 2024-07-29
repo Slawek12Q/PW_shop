@@ -7,11 +7,12 @@ import pl.base.pages.sections.searchResultsSection.SearchResultSection;
 import static org.example.utils.PageUtils.waitForLoadState;
 
 @Getter
-public class SearchResultPage {
+public class SearchResultPage extends BasePage{
 
     private SearchResultSection searchResultSection;
 
     public SearchResultPage(Page page) {
+        super(page);
         waitForLoadState(page);
         this.searchResultSection = new SearchResultSection(page);
     }

@@ -6,14 +6,13 @@ import pl.base.pages.sections.TopMenuAndSearchSection;
 import pl.base.pages.sections.TopNavigationSection;
 
 @Getter
-public class HomePage {
+public class HomePage extends BasePage{
 
-    private Page page;
     private TopMenuAndSearchSection topMenuAndSearchSection;
     private TopNavigationSection topNavigationSection;
 
     public HomePage(Page page) {
-        this.page = page;
+        super(page);
         this.topMenuAndSearchSection = new TopMenuAndSearchSection(page);
         this.topNavigationSection = new TopNavigationSection(page);
     }

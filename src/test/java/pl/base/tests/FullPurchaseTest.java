@@ -9,7 +9,6 @@ import pl.base.pages.ProductDetailsPage;
 import pl.base.pages.SearchResultPage;
 import pl.base.pages.ShoppingCardPage;
 import pl.base.pages.modals.AddToCartConfirmationModalPage;
-import pl.base.pages.sections.productDetailsPage.ProductCustomizationSection;
 
 public class FullPurchaseTest extends BaseTest {
 

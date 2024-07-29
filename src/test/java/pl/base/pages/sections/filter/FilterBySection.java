@@ -3,21 +3,21 @@ package pl.base.pages.sections.filter;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pl.base.pages.ArtPage;
+import pl.base.pages.BasePage;
 
 import java.util.Arrays;
 
 import static org.example.utils.StringUtils.toUTF8;
 
-public class FilterBySection {
+public class FilterBySection extends BasePage {
 
-    private Page page;
     private Locator leftSlider;
     private Locator priceLabel;
 
     private Locator matPaperFilter;
 
     public FilterBySection(Page page) {
-        this.page = page;
+        super(page);
         this.leftSlider = page.locator(".ui-slider-handle").first();
         this.priceLabel = page.locator("#search_filters li p");
         this.matPaperFilter = page.locator("//input[contains(@id, 'facet_input')]").first();

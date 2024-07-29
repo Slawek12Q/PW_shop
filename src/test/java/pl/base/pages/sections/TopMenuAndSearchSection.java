@@ -4,16 +4,16 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import pl.base.pages.ArtPage;
+import pl.base.pages.BasePage;
 import pl.base.pages.SearchResultPage;
 
-public class TopMenuAndSearchSection {
+public class TopMenuAndSearchSection extends BasePage {
 
-    private Page page;
     private Locator searchInput;
     private Locator artButton;
 
     public TopMenuAndSearchSection(Page page) {
-        this.page = page;
+        super(page);
         this.searchInput = page.locator("input[name=s]");
         this.artButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Art").setExact(true));
     }

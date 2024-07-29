@@ -3,17 +3,17 @@ package pl.base.pages.sections.filter;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import lombok.Getter;
+import pl.base.pages.BasePage;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-public class ProductsSection {
-    Page page;
+public class ProductsSection extends BasePage {
     private List<Locator> products;
 
     public ProductsSection(Page page) {
-        this.page = page;
+        super(page);
         this.products = page.locator(".thumbnail-top").all();
     }
 

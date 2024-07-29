@@ -2,15 +2,15 @@ package pl.base.pages.sections.productDetailsPage;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import pl.base.pages.BasePage;
 import pl.base.pages.modals.AddToCartConfirmationModalPage;
 
-public class AddToCartSection {
+public class AddToCartSection extends BasePage {
 
     private Locator addToCartButton;
-    Page page;
 
     public AddToCartSection(Page page) {
-        this.page = page;
+        super(page);
         this.addToCartButton = page.locator(".add-to-cart");
     }
 
