@@ -20,10 +20,11 @@ public class AddressSection extends BasePage {
         this.continueButton = page.locator("#delivery-address .continue");
     }
 
-    public void fillAddressAndContinue() {
+    public ShippingMethodSection fillAddressAndContinue() {
         address.fill(faker.address().streetAddress());
-        zipCode.fill(faker.address().zipCode());
+        zipCode.fill("11-123");
         city.fill(faker.address().city());
         continueButton.click();
+        return new ShippingMethodSection(page);
     }
 }
