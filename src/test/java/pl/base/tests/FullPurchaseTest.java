@@ -4,10 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.example.utils.Properties;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pl.base.pages.HomePage;
-import pl.base.pages.ProductDetailsPage;
-import pl.base.pages.SearchResultPage;
-import pl.base.pages.ShoppingCardPage;
+import pl.base.pages.*;
 import pl.base.pages.modals.AddToCartConfirmationModalPage;
 
 public class FullPurchaseTest extends BaseTest {
@@ -30,7 +27,9 @@ public class FullPurchaseTest extends BaseTest {
         String confirmationLabel = addToCartConfirmationModalPage.getConfirmationLabel();
         ShoppingCardPage shoppingCardPage = addToCartConfirmationModalPage.proceedToCheckout();
         Assertions.assertThat(confirmationLabel).contains("Product successfully added to your shopping cart");
-        shoppingCardPage.getSummarySection().proceedToCheckout();
+
+        SummaryPurchasePage summaryPurchasePage = shoppingCardPage.getSummarySection().proceedToCheckout();
+        summaryPurchasePage.getPersonalInformationSection().fillForm();
         page.waitForTimeout(5000);
     }
 }
