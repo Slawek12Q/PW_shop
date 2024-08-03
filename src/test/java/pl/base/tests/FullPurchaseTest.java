@@ -29,7 +29,7 @@ public class FullPurchaseTest extends BaseTest {
         Assertions.assertThat(confirmationLabel).contains("Product successfully added to your shopping cart");
 
         SummaryPurchasePage summaryPurchasePage = shoppingCardPage.getSummarySection().proceedToCheckout();
-        summaryPurchasePage.getPersonalInformationSection().fillForm();
+        summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue();
         page.waitForTimeout(5000);
     }
 }

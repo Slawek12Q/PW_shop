@@ -14,7 +14,7 @@ public class PersonalInformationSection extends BasePage {
     private Locator termsAndConditions;
     private Locator customerDataPrivacy;
     private Locator continueButton;
-    Faker faker = new Faker();
+    private Faker faker = new Faker();
     public PersonalInformationSection(Page page) {
         super(page);
         this.socialTitle = page.locator("#field-id_gender-2");
@@ -26,7 +26,7 @@ public class PersonalInformationSection extends BasePage {
         this.continueButton = page.locator("#checkout-personal-information-step #checkout-guest-form .continue");
     }
 
-    public void fillForm() {
+    public AddressSection fillPersonalInformationAndContinue() {
         if(!socialTitle.isChecked()) {
             socialTitle.check();
         }
@@ -36,5 +36,7 @@ public class PersonalInformationSection extends BasePage {
         termsAndConditions.check();
         customerDataPrivacy.check();
         continueButton.click();
+
+        return new AddressSection(page);
     }
 }
