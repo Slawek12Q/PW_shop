@@ -27,9 +27,8 @@ public class FullPurchaseTest extends BaseTest {
         String confirmationLabel = addToCartConfirmationModalPage.getConfirmationLabel();
         ShoppingCardPage shoppingCardPage = addToCartConfirmationModalPage.proceedToCheckout();
         Assertions.assertThat(confirmationLabel).contains("Product successfully added to your shopping cart");
-
         SummaryPurchasePage summaryPurchasePage = shoppingCardPage.getSummarySection().proceedToCheckout();
-        summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue();
-        page.waitForTimeout(5000);
+        summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue().fillAddressAndContinue().chooseShippingMethodAndContinue().choosePaymentMethodAndContinue();
+        page.waitForTimeout(20000);
     }
 }
