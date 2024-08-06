@@ -6,9 +6,6 @@ import lombok.Getter;
 import org.example.dto.ProductDTO;
 import pl.base.pages.BasePage;
 import pl.base.pages.ProductDetailsPage;
-import pl.base.pages.SearchResultPage;
-import pl.base.pages.sections.productDetailsPage.AddToCartSection;
-import pl.base.pages.sections.productDetailsPage.ProductCustomizationSection;
 
 import java.util.List;
 import java.util.stream.Collectors;

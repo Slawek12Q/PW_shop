@@ -2,10 +2,13 @@ package pl.base.tests;
 
 import org.assertj.core.api.Assertions;
 import org.example.utils.Properties;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.base.pages.*;
 import pl.base.pages.modals.AddToCartConfirmationModalPage;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class FullPurchaseTest extends BaseTest {
 
@@ -26,9 +29,10 @@ public class FullPurchaseTest extends BaseTest {
         AddToCartConfirmationModalPage addToCartConfirmationModalPage = productDetailsPage.getAddToCartSection().addToCart();
         String confirmationLabel = addToCartConfirmationModalPage.getConfirmationLabel();
         ShoppingCardPage shoppingCardPage = addToCartConfirmationModalPage.proceedToCheckout();
-        Assertions.assertThat(confirmationLabel).contains("Product successfully added to your shopping cart");
+        assertThat(confirmationLabel).contains("Product successfully added to your shopping cart");
         SummaryPurchasePage summaryPurchasePage = shoppingCardPage.getSummarySection().proceedToCheckout();
-        summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue().fillAddressAndContinue().chooseShippingMethodAndContinue().choosePaymentMethodAndContinue();
-        page.waitForTimeout(20000);
+        String confirmationNote = summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue().fillAddressAndContinue().chooseShippingMethodAndContinue().choosePaymentMethodAndContinue().getConfirmationNote();
+        page.waitForTimeout(4000);
+        Assert.assertTrue(confirmationNote.contains("YOUR ORDER IS CONFIRMED"));
     }
 }

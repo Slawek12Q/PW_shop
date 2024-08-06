@@ -16,9 +16,11 @@ public class PaymentSection extends BasePage {
         this.placeOrderButton = page.locator("#checkout-payment-step #payment-confirmation button");
     }
 
-    public void choosePaymentMethodAndContinue() {
+    public OrderConfirmationSection choosePaymentMethodAndContinue() {
         paymentMethod.check();
         termsOfService.check();
         placeOrderButton.click();
+
+        return new OrderConfirmationSection(page);
     }
 }
