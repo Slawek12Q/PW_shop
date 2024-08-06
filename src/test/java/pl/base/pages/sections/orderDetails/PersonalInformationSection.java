@@ -3,6 +3,7 @@ package pl.base.pages.sections.orderDetails;
 import com.github.javafaker.Faker;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import org.example.dto.PersonalInformationDTO;
 import pl.base.pages.BasePage;
 
 public class PersonalInformationSection extends BasePage {
@@ -30,13 +31,23 @@ public class PersonalInformationSection extends BasePage {
         if(!socialTitle.isChecked()) {
             socialTitle.check();
         }
-        firstName.fill(faker.name().firstName());
-        lastName.fill(faker.name().lastName());
-        email.fill(faker.internet().emailAddress());
+        PersonalInformationDTO personalInformationDTO = createPersonalInformationDTO();
+
+        firstName.fill(personalInformationDTO.getFirstName());
+        lastName.fill(personalInformationDTO.getLastName());
+        email.fill(personalInformationDTO.getEmail());
         termsAndConditions.check();
         customerDataPrivacy.check();
         continueButton.click();
 
         return new AddressSection(page);
+    }
+
+    private PersonalInformationDTO createPersonalInformationDTO() {
+        return PersonalInformationDTO.builder()
+                .firstName(faker.name().firstName())
+                .lastName(faker.name().lastName())
+                .email(faker.internet().emailAddress())
+                .build();
     }
 }
