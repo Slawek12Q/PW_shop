@@ -3,6 +3,7 @@ package pl.base.pages.sections.orderDetails;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import pl.base.pages.BasePage;
+import pl.base.pages.OrderConfirmationPage;
 
 public class PaymentSection extends BasePage {
 
@@ -16,11 +17,11 @@ public class PaymentSection extends BasePage {
         this.placeOrderButton = page.locator("#checkout-payment-step #payment-confirmation button");
     }
 
-    public OrderConfirmationSection choosePaymentMethodAndContinue() {
+    public OrderConfirmationPage choosePaymentMethodAndContinue() {
         paymentMethod.check();
         termsOfService.check();
         placeOrderButton.click();
 
-        return new OrderConfirmationSection(page);
+        return new OrderConfirmationPage(page);
     }
 }
