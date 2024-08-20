@@ -32,6 +32,7 @@ public class FullPurchaseTest extends BaseTest {
         SummaryPurchasePage summaryPurchasePage = shoppingCardPage.getSummarySection().proceedToCheckout();
         OrderConfirmationPage orderConfirmationPage = summaryPurchasePage.getPersonalInformationSection().fillPersonalInformationAndContinue().fillAddressAndContinue().chooseShippingMethodAndContinue().choosePaymentMethodAndContinue();
         String confirmationNote = orderConfirmationPage.getOrderConfirmationDetailsSection().getConfirmationNote();
+
         Assert.assertTrue(confirmationNote.contains("YOUR ORDER IS CONFIRMED"));
     }
 }
