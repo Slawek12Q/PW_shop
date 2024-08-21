@@ -19,4 +19,8 @@ public class SummaryPurchasePage extends BasePage {
         this.personalInformationSection = new PersonalInformationSection(page);
         this.addressSection = new AddressSection(page);
     }
+
+    public OrderConfirmationPage fillAllDataAndGo() {
+        return personalInformationSection.fillPersonalInformationAndContinue().fillAddressAndContinue().chooseShippingMethodAndContinue().choosePaymentMethodAndContinue();
+    }
 }

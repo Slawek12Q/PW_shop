@@ -16,4 +16,10 @@ public class ShoppingCardPage extends BasePage {
         waitForLoadState(page);
         this.summarySection = new SummarySection(page);
     }
+
+    public SummaryPurchasePage proceedToCheckout() {
+        return summarySection.proceedToCheckout();
+    }
+
+
 }

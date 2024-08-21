@@ -7,7 +7,7 @@ import pl.base.pages.sections.searchResultsSection.SearchResultSection;
 import static org.example.utils.PageUtils.waitForLoadState;
 
 @Getter
-public class SearchResultPage extends BasePage{
+public class SearchResultPage extends BasePage {
 
     private SearchResultSection searchResultSection;
 
@@ -15,5 +15,9 @@ public class SearchResultPage extends BasePage{
         super(page);
         waitForLoadState(page);
         this.searchResultSection = new SearchResultSection(page);
+    }
+
+    public ProductDetailsPage viewProductDetail(String productName) {
+        return searchResultSection.viewProductDetail(productName);
     }
 }

@@ -12,6 +12,7 @@ public class AddToCartConfirmationModalPage extends BasePage {
 
     private Locator confirmationLabel;
     private Locator proceedToCheckoutButton;
+
     public AddToCartConfirmationModalPage(Page page) {
         super(page);
         waitForLoadState(page);
@@ -23,7 +24,7 @@ public class AddToCartConfirmationModalPage extends BasePage {
         return confirmationLabel.innerText();
     }
 
-    public ShoppingCardPage proceedToCheckout() {
+    public ShoppingCardPage proceedToCheckoutOnModal() {
         proceedToCheckoutButton.click();
         return new ShoppingCardPage(page);
     }
