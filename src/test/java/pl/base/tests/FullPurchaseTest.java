@@ -59,4 +59,26 @@ public class FullPurchaseTest extends BaseTest {
 
         Assert.assertTrue(confirmationNote.contains("YOUR ORDER IS CONFIRMED"));
     }
+
+    @Test
+    public void shouldPurchaseSelectedProductTest_v3() {
+        AddToCartConfirmationModalPage confirmationModalPage =
+                homePage
+                        .searchForProducts(productName)
+                        .viewProductDetail(productName)
+                        .customizeProduct("bla bla bla")
+                        .addToCart();
+
+        assertThat(confirmationModalPage.getConfirmationLabel()).contains("Product successfully added to your shopping cart");
+
+        OrderConfirmationPage orderConfirmationPage =
+                confirmationModalPage
+                        .proceedToCheckoutOnModal()
+                        .proceedToCheckout()
+                        .fillAllDataAndGo();
+
+        String confirmationNote = orderConfirmationPage.getOrderConfirmationDetailsSection().getConfirmationNote();
+
+        Assert.assertTrue(confirmationNote.contains("YOUR ORDER IS CONFIRMED"));
+    }
 }

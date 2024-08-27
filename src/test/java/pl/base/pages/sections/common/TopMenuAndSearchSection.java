@@ -1,4 +1,4 @@
-package pl.base.pages.sections;
+package pl.base.pages.sections.common;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -7,13 +7,14 @@ import pl.base.pages.ArtPage;
 import pl.base.pages.BasePage;
 import pl.base.pages.SearchResultPage;
 
-public class TopMenuAndSearchSection extends BasePage {
+public class TopMenuAndSearchSection {
 
+    private Page page;
     private Locator searchInput;
     private Locator artButton;
 
     public TopMenuAndSearchSection(Page page) {
-        super(page);
+        this.page = page;
         this.searchInput = page.locator("input[name=s]");
         this.artButton = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("Art").setExact(true));
     }
